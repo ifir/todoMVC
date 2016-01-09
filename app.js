@@ -3,11 +3,11 @@ require.config({
 	paths : {
 		jquery 	: '../js/jquery.min',
 		base 	: '../js/base',
-		// storage	: '../js/storage',
-		// sTodo	: '../services/sTodo'
+		storage	: '../js/storage',
+		sTodo	: '../services/sTodo'
 	},
 });
 
-require(['jquery','msgHub','todoApp'],function($,msgHub,todoApp){
+require(['jquery','msg','todoApp'],function($,msg,todoApp){
 	todoApp.render( $('#app') );
 });
