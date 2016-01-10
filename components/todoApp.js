@@ -1,7 +1,5 @@
 define(function(require, exports, module){
 	var $ = require('jquery');
-	var base = require('base');
-	var sTodo = require('sTodo');
 	var newTodo = require('newTodo'); //添加
 	var listTodo = require('todoList');	//列表
 	var sortTodo = require('todoSort'); //排序

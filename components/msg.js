@@ -6,14 +6,20 @@ define(function(require, exports, module){
 	var todoItem = require('todoItem');
 	var todoSort = require('todoSort');
 	/** ------ 请求消息的实现 ------ **/
+	//添加新的todoItem
 	base.impl("addTodo", sTodo.add);
+	//获取Todo总数量
 	base.impl("getTodosCount", sTodo.getAllCount);
 	base.impl("listTodosByCompleted", sTodo.list);
+	//添加新的todoItem
 	base.impl("appendTodo", todoItem.render);
 	base.impl("deleteTodo", sTodo.remove);
 	base.impl("getAllTodos", sTodo.getDB);
+	//获取已完成的Todo数量
 	base.impl("getCompletedCount", sTodo.getCompletedCount);
+	//获取未完成的Todo数量
 	base.impl("getRemainingCount", sTodo.getRemainingCount);
+	//清除已完成的Todo
 	base.impl("clearCompleted", sTodo.clearCompleted);
 	base.impl( 'toggleCompleted', function(id,completed){
 		return sTodo.update({id:id,completed:completed});

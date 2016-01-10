@@ -2,9 +2,6 @@ define(function(require, exports, module){
 	var $ = require('jquery');
 	var base = require('base');
 
-	// var _opt = {
-	// 	file : "newTodo.js"
-	// };
 
 	var _dom = {
 		slot	: null,

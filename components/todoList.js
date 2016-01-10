@@ -34,7 +34,7 @@ define(function(require,exports,module){
 		//加载数据
 		loadData();
 	}
-
+	//加载数据
 	function loadData(){
 		if(!_dom.slot) return;
 		base.trigger('ListTodo_load');
@@ -50,7 +50,7 @@ define(function(require,exports,module){
 		listTodos(_opt.filterKey);
 		updateChkAllBtn();
 	}
-
+	//列表的状态
 	function listTodos(filterKey){
 		var completed;
 		switch(filterKey){
@@ -75,7 +75,7 @@ define(function(require,exports,module){
 			base.request("appendTodo", _dom.todosUl, todo);
 		}
 	}
-
+	//checkbox全选
 	function toggleAll(completed){
 		var todos = base.request("getAllTodos");
 		$(todos).each(function(i,todo){
@@ -84,7 +84,7 @@ define(function(require,exports,module){
 		});
 		loadData();
 	}
-
+	//
 	function updateChkAllBtn(){
 		if(undefined === _dom.chkAll[0])
 			return;

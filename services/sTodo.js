@@ -6,16 +6,16 @@ define(function(require, exports, module){
 		STORAGE_ID : "TODO",
 		currID : getCurrID()
 	}
-
+	//获取localStorage
 	function getDB(){
 		return storage.get("TODO");
 	}
-
+	//设置localStorage
 	function putDB(todos){
 		storage.put(_opt.STORAGE_ID, todos);
 		return true;
 	}
-
+	//删除localStorage
 	function cleanDB(){
 		storage.clean(_opt.STORAGE_ID);
 		return true;
@@ -27,7 +27,7 @@ define(function(require, exports, module){
 		return arr.length>0 ? arr[arr.length-1].id : 0;
 	}
 
-	//增
+	//增加localStorage数据
 	function add(todo){
 		var todos = getDB();
 		todo.id = ++_opt.currID;
@@ -36,14 +36,14 @@ define(function(require, exports, module){
 		return _opt.currID;
 	}
 
-	//删
+	//删除localStorage数据
 	function remove(id){
 		var todos = getDB();
 		todos.splice(indexByTodoID(id),1);
 		return putDB(todos);
 	}
 
-	//改
+	//更新localStorage数据
 	function update(todo){
 		var todos = getDB();
 		for(var i=todos.length-1; i>=0; i--){
@@ -86,7 +86,7 @@ define(function(require, exports, module){
 	function getAllCount(){
 		return getDB().length;
 	}
-
+	//获取未完成的Todo数量
 	function getRemainingCount(){
 		var todos = getDB();
 		var remainingCount = 0;
