@@ -3,8 +3,8 @@ define(function(require, exports, module){
 	var sto = require('storage');
 	var storage = new sto.Storage();
 	var _opt = {
-		STORAGE_ID : "TODO",
-		currID : getCurrID()
+		STORAGE_ID : "TODO",//localStorage Key
+		currID : getCurrID()//用于存储列表增加之后的id值
 	}
 	//获取localStorage
 	function getDB(){
