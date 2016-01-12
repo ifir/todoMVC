@@ -13,7 +13,7 @@ define(function(require,exports,module){
 	};
 
 	var _htm = {
-		main : 
+		main :
 			"<input id='toggle-all' type='checkbox'>"+
             "<ul id='todo-list'></ul>"
 	};
