@@ -10,6 +10,12 @@ define(function(require, exports, module){
 		if(!fns || 0===fns.length){
 			return false;
 		}
+		//特别注意这里是=而不是==，要是==的话循环就没法进行了。 
+		// 这个条件判断很扯，我也比较晕。类似于： 
+		// if(a=b) {...} //注意是= 
+		// 此时如果b是false，那就会返回false了。 
+		// 回到上面的例子中，如果i++加出了头，那ary[i++]就是false值了（null,undefined都算），所以条件就成了false，所以循环就断了。 
+		// 这个例子局限很大，snandy也提到了，比如你数组中就是有个0，那也可能会导致循环终结。
 		for(var i=0,fn; fn=fns[i++];){
 			fn.apply(this, arguments);
 		}
