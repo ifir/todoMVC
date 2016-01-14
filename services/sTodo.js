@@ -29,6 +29,7 @@ define(function(require, exports, module){
 
 	//增加localStorage数据
 	function add(todo){
+		console.log(todo)
 		var todos = getDB();
 		todo.id = ++_opt.currID;
 		todos.push(todo);

@@ -37,6 +37,7 @@ define(function(require, exports, module){
 				title 	 : title,
 				completed: false
 			};
+			console.log('add')
 			if(	-1 != base.request("addTodo", newTodo) ){
 				//成功添加后发布消息
 				base.trigger('NewTodo_addTodo',newTodo);
