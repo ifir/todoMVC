@@ -24,16 +24,17 @@ define(function(require, exports, module){
 	//获得Todo自增ID的当前值
 	function getCurrID(){
 		var arr = getDB();
+		//获取最后一个todo的id值
 		return arr.length>0 ? arr[arr.length-1].id : 0;
 	}
 
-	//增加localStorage数据
+	//增加todolist
 	function add(todo){
-		console.log(todo)
-		var todos = getDB();
-		todo.id = ++_opt.currID;
-		todos.push(todo);
-		putDB(todos);
+		//todo参数从 request的arguments获取
+		var todos = getDB(); //获取'TODO'的数组
+		todo.id = ++_opt.currID;//新增id属性
+		todos.push(todo); //把todo内容加到todos的数组中
+		putDB(todos);//设置新的todo
 		return _opt.currID;
 	}
 

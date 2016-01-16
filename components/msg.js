@@ -7,7 +7,7 @@ define(function(require, exports, module){
 	var todoSort = require('todoSort');
 	/** ------ 请求消息的实现 ------ **/
 	//添加新的todoItem
-	base.impl("addTodo", sTodo.add);
+	base.impl("addTodo", sTodo.add);//impl(key,fn)   fn为sTodo的函数
 	//获取Todo总数量
 	base.impl("getTodosCount", sTodo.getAllCount);
 	base.impl("listTodosByCompleted", sTodo.list);
@@ -29,7 +29,7 @@ define(function(require, exports, module){
 	});
 
 	/** ------------------------- 触发消息的绑定 ------------------------- **/
-	//NewTodo组件的消息：
+	//NewTodo组件的消息： bind(key, fns)   fns为数组
 	base.bind('NewTodo_addTodo', [
 		todoList.loadData
 	]);
