@@ -21,9 +21,11 @@ define(function(require, exports, module){
 	base.impl("getRemainingCount", sTodo.getRemainingCount);
 	//清除已完成的Todo
 	base.impl("clearCompleted", sTodo.clearCompleted);
+	//更新todod的completed状态
 	base.impl( 'toggleCompleted', function(id,completed){
 		return sTodo.update({id:id,completed:completed});
 	});
+	//更新todo的标题名称
 	base.impl( 'updateTodoTitle', function(id,title){
 		return sTodo.update({id:id,title:title});
 	});

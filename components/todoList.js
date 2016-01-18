@@ -23,12 +23,13 @@ define(function(require,exports,module){
 		_dom.slot.html(_htm.main);
 
 		//实例DOM对象
-		_dom.todosUl = _dom.slot.find("#todo-list");
-		_dom.chkAll = _dom.slot.find("#toggle-all");
+		_dom.todosUl = _dom.slot.find("#todo-list");//todos列表
+		_dom.chkAll = _dom.slot.find("#toggle-all");//全选按钮
 
 		//绑定事件函数
+		//全选事件
 		_dom.chkAll.click(function(){
-			toggleAll($(this)[0].checked);
+			toggleAll($(this)[0].checked);//传递true和false
 		})
 
 		//加载数据
@@ -36,18 +37,20 @@ define(function(require,exports,module){
 	}
 	//加载数据
 	function loadData(){
-		if(!_dom.slot) return;
-		base.trigger('ListTodo_load');
+		if(!_dom.slot) return;//没有list节点,return
+		base.trigger('ListTodo_load');//触发ListTodo_load事件
 
-		//Todo总数不为0时，隐藏本组件，否则显示该组件。
+		//Todo总数为0时，隐藏本组件，否则显示该组件。
 		var todosCount = base.request("getTodosCount");
 		if(0===todosCount){
 			_dom.slot.addClass("hidden");
-			return;
+			return; //如何没有todos就直接跳出函数,提高性能
 		}else{
 			_dom.slot.removeClass("hidden");
 		}
+		//列表的状态
 		listTodos(_opt.filterKey);
+		//更新全选按钮状态
 		updateChkAllBtn();
 	}
 	//列表的状态
@@ -77,19 +80,19 @@ define(function(require,exports,module){
 	}
 	//checkbox全选
 	function toggleAll(completed){
-		var todos = base.request("getAllTodos");
-		console.log(todos)
+		var todos = base.request("getAllTodos");//获取所有todos的数据
 		$(todos).each(function(i,todo){
-			console.log(todo)
 			var ok = base.request("toggleCompleted", todo.id, completed);
 			ok ? loadData() : console.log("Error of toggleCompleted.");
 		});
 		loadData();
 	}
-	//
+	//更新全选按钮状态
 	function updateChkAllBtn(){
-		if(undefined === _dom.chkAll[0])
+		if(undefined === _dom.chkAll[0]) //如果没有全选按钮,return
 			return;
+		//getCompletedCount获取已完成的Todo数量 && getRemainingCount获取未完成的Todo数量
+		//当全选按钮为选中时表示未完成的Todo数量为0并且完成的todo数量要大于0,防止todo数量为零,全选按钮的状态bug
 		if( base.request('getCompletedCount')>0 && base.request('getRemainingCount')==0 ){
 			_dom.chkAll[0].checked = true;
 		}else{

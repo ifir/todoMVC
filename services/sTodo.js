@@ -51,8 +51,13 @@ define(function(require, exports, module){
 		for(var i=todos.length-1; i>=0; i--){
 			if(todo.id==todos[i].id){
 				for(var p in todo){
+					//把最新获取的todo的参数赋值给todos,更新todos的数据
 					todos[i][p] = todo[p];
 				}
+				// break 语句用于跳出循环。
+				// continue 用于跳过循环中的一个迭代。
+				// break 语句跳出循环后，会继续执行该循环之后的代码
+				//跳出循环，不在执行for循环,还会执行后面的语句
 				break;
 			}
 		}
@@ -64,18 +69,20 @@ define(function(require, exports, module){
 		var todos = getDB();
 		for(var i=todos.length-1; i>=0; i--){
 			if(todos[i].id == id){
+				//通过id查询,返回查询的结果
 				return todos[i];
 			}
 		}
 	}
 
 	//查（遍历）
+	//查询compled的状态,进行分类
 	function list(completed){
 		var todos = getDB();
 		if(undefined===completed){
 			return todos;
 		}else{
-			var rsTodos = [];
+			var rsTodos = [];//用来存储查询的结果
 			$(todos).each(function(i,todo){
 				if(completed === todo.completed)
 					rsTodos.push(todo);
