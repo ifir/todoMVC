@@ -78,7 +78,9 @@ define(function(require,exports,module){
 	//checkbox全选
 	function toggleAll(completed){
 		var todos = base.request("getAllTodos");
+		console.log(todos)
 		$(todos).each(function(i,todo){
+			console.log(todo)
 			var ok = base.request("toggleCompleted", todo.id, completed);
 			ok ? loadData() : console.log("Error of toggleCompleted.");
 		});

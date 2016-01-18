@@ -41,7 +41,7 @@ define(function(require, exports, module){
 	//删除localStorage数据
 	function remove(id){
 		var todos = getDB();
-		todos.splice(indexByTodoID(id),1);
+		todos.splice(indexByTodoID(id),1);//删除id对应的数据
 		return putDB(todos);
 	}
 
