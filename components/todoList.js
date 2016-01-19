@@ -72,9 +72,13 @@ define(function(require,exports,module){
 				_opt.filterKey = 'all';
 				break;
 		}
-		_dom.todosUl.html('');
+		_dom.todosUl.html('');//清空todos
+		//请求listTodosByCompleted的函数
+		//todos存储completed状态的数据数组
 		var todos = base.request("listTodosByCompleted",completed) || [];
 		for(var i=0, todo; todo=todos[i]; i++){
+			//请求appendTodo的函数
+			//添加新的todoItem
 			base.request("appendTodo", _dom.todosUl, todo);
 		}
 	}
@@ -82,7 +86,7 @@ define(function(require,exports,module){
 	function toggleAll(completed){
 		var todos = base.request("getAllTodos");//获取所有todos的数据
 		$(todos).each(function(i,todo){
-			var ok = base.request("toggleCompleted", todo.id, completed);
+			var ok = base.request("toggleCompleted", todo.id, completed);//更新todod的completed状态
 			ok ? loadData() : console.log("Error of toggleCompleted.");
 		});
 		loadData();

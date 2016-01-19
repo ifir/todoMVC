@@ -10,10 +10,13 @@ define(function(require, exports, module){
 	base.impl("addTodo", sTodo.add);//impl(key,fn)   fn为sTodo的函数
 	//获取Todo总数量
 	base.impl("getTodosCount", sTodo.getAllCount);
+	//通过查询todos中compled的状态进行分类
 	base.impl("listTodosByCompleted", sTodo.list);
 	//添加新的todoItem
 	base.impl("appendTodo", todoItem.render);
+	//删除todoItem
 	base.impl("deleteTodo", sTodo.remove);
+	//获取所有todos数据
 	base.impl("getAllTodos", sTodo.getDB);
 	//获取已完成的Todo数量
 	base.impl("getCompletedCount", sTodo.getCompletedCount);

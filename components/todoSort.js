@@ -4,8 +4,8 @@ define(function(require,exports,module){
 
 	var _dom = {
 		slot : null,
-		remainingCount: null,
-		completedCount: null
+		remainingCount: null,//未完成数量
+		completedCount: null//已完成数量
 	};
 
 	var _htm = {
@@ -24,8 +24,8 @@ define(function(require,exports,module){
 		_dom.slot.html(_htm.main);
 
 		//实例DOM对象
-		_dom.remainingCount = _dom.slot.find('#remainingCount');
-		_dom.completedCount = _dom.slot.find('#completedCount');
+		_dom.remainingCount = _dom.slot.find('#remainingCount');//左下角未完成数字
+		_dom.completedCount = _dom.slot.find('#completedCount');//右下角已完成数字
 
 		//绑定事件函数
 		var filters = _dom.slot.find('#filters');
@@ -42,7 +42,7 @@ define(function(require,exports,module){
 	//组件状态刷新函数
 	function refresh(){
 		if(null===_dom.slot) return;
-		//Todo总数不为0时，隐藏本组件，否则显示该组件。
+		//Todo总数为0时，隐藏本组件，否则显示该组件。
 		var todosCount = base.request('getTodosCount');
 		if(0===todosCount){
 			_dom.slot.addClass('hidden');
@@ -57,20 +57,24 @@ define(function(require,exports,module){
 		//完成的Todo数量大于0时显示'clear-completed'按钮，否则隐藏。
 		var completedCount = base.request('getCompletedCount');
 		if(completedCount>0){
+			//parent() 获得当前匹配元素集合中每个元素的父元素
 			_dom.completedCount.parent().removeClass('hidden');
+			//左下角显示未完成数量
 			_dom.completedCount.text(completedCount);
 		}else{
 			_dom.completedCount.parent().addClass('hidden');
 		}
 	};
-
+	//筛选all,active,completed三种状态
 	function onFilter(filterBtn){
+		//获取value获得当前要筛选的状态
 		var filterKey = filterBtn.attr('value');
+		//closest() 从当前元素开始。沿 DOM 树向上遍历，直到找到已应用选择器的一个匹配为止。
 		filterBtn.closest('#filters').find('a').removeClass('selected');
 		filterBtn.addClass('selected');
 		base.trigger('SortTodo_onFilter',filterKey);
 	}
-
+	//右下角Clear completed按钮事件
 	function clearCompleted(){
 		var ok = base.request('clearCompleted');
 		ok ? base.trigger('SortTodo_clearCompleted') : console.log('Error of clearCompleted.');

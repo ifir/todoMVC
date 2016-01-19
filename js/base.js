@@ -22,6 +22,7 @@ define(function(require, exports, module){
 			//也就是把trigger的arguments传递给sTodo函数
 			fn.apply(this, arguments);
 		}
+
 	}
 
 	//请求消息(一个消息对应一个实现)

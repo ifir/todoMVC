@@ -23,28 +23,33 @@ define(function(require, exports, module){
 		if(!slot || !todo) return; //校验参数
 
 		_dom.slot = slot;
-
+		//进行替换
 		var todoLi = $( _htm.main
 			.replace('@id',todo.id)
 			.replace('@title',todo.title) );
-
+		//如果todoItem完成了添加completed的类
 		if(todo.completed){
 			todoLi.addClass('completed');
+			//checkbox选中
 			todoLi.find('input[type=checkbox]')[0].checked = 'checked';
 		}
 
 		//绑定事件函数
+		//删除todoItem
 		todoLi.find('.destroy').click(function(){
 			removeTodo(todoLi);
 		});
+		//修改todoItem是否完成
 		todoLi.find('.toggle').click(function(){
 			toggleCompleted( todoLi, $(this) );
 		});
+		//双击修改todoItem标题
 		todoLi.find('.todoTitle').dblclick(function(){
 			onEditTodo( todoLi );
 		});
-
-		_dom.slot.prepend(todoLi, self.file);
+		//新添加todoItem添加在列表的前面
+		//prepend向元素的开头添加与append相反
+		_dom.slot.prepend(todoLi);
 	};
 
 	//删除Todo
@@ -62,10 +67,10 @@ define(function(require, exports, module){
 	//编辑Todo
 	function onEditTodo(todoLi){
 		todoLi.addClass('editing');
-		var title = todoLi.find('.todoTitle').text();
-		var editInpt = todoLi.find('input[class=edit]');
-		editInpt.blur(function(){
-			var title = editInpt.val();
+		var title = todoLi.find('.todoTitle').text();//把title存起来
+		var editInpt = todoLi.find('input[class=edit]');//获取编辑的input元素
+		editInpt.blur(function(){//失去焦点触发
+			var title = editInpt.val();//把title赋值给editInpt的value
 			var ok = base.request('updateTodoTitle',todoLi.attr('id'),title);
 			if(ok){
 				todoLi.removeClass('editing');
@@ -74,6 +79,7 @@ define(function(require, exports, module){
 				console.log('Error of onEditTodo.');
 			}
 		});
+		//进入焦点触发
 		editInpt.val(title).focus();
 	};
 
