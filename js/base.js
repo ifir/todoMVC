@@ -91,6 +91,7 @@ define(function(require, exports, module){
 		_fnImpl[key] = fn;
 	}
 
+
 	exports.trigger = trigger;
 	exports.request = request;
 	exports.bind = bind;
